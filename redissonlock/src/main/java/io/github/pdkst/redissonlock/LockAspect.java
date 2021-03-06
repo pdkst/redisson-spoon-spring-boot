@@ -6,9 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.reflect.MethodSignature;
-
-import java.lang.reflect.Method;
 
 /**
  * 通过AOP对方法进行拦截
@@ -24,13 +21,8 @@ public class LockAspect {
 
     @Around("@annotation(lock)")
     public Object doAround(ProceedingJoinPoint pjp, RedissonLock lock) throws Throwable {
-        // 方法签名
-        final MethodSignature signature = (MethodSignature) pjp.getSignature();
         // 参数名发现器
-        final Object target = pjp.getTarget();
-        final Class<?> clazz = target != null ? target.getClass() : null;
-        final Method method = signature.getMethod();
-        final InvokerContext invokerContext = new InvokerContext(target, clazz, method, pjp.getArgs(), lock);
+        final InvokerContext invokerContext = new InvokerContext(pjp, lock);
         final LockContext<?> lockContext = lockInvoker.initContext(invokerContext);
         try {
             if (lockContext.onLock()) {

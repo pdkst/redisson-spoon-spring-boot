@@ -4,6 +4,8 @@ import io.github.pdkst.redissonlock.RedissonLock;
 import io.github.pdkst.redissonlock.spel.ExpressionEvaluator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.reflect.MethodSignature;
 
 import java.lang.reflect.Method;
 
@@ -14,14 +16,27 @@ import java.lang.reflect.Method;
 @Data
 @AllArgsConstructor
 public class InvokerContext {
-    private Object object;
-    private Class<?> clazz;
-    private Method method;
+    private final Object object;
+    private final Class<?> clazz;
+    private final Method method;
     private Object[] args;
-    private RedissonLock redissonLock;
+    private final LockCondition lockCondition;
+    private final ExpressionEvaluator evaluator;
 
-    public String parse() {
-        final ExpressionEvaluator evaluator = new ExpressionEvaluator();
-        return evaluator.condition(redissonLock.value(), this);
+    public InvokerContext(final ProceedingJoinPoint joinPoint, final RedissonLock redissonLock) {
+        this(joinPoint, redissonLock, new ExpressionEvaluator());
+    }
+
+    public InvokerContext(final ProceedingJoinPoint joinPoint, final RedissonLock redissonLock, ExpressionEvaluator evaluator) {
+        this.lockCondition = new LockCondition(redissonLock.value(), redissonLock.timeout(), redissonLock.leaseTime());
+        this.object = joinPoint.getTarget();
+        this.clazz = object != null ? object.getClass() : null;
+        final MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        this.method = signature.getMethod();
+        this.evaluator = evaluator;
+    }
+
+    public String parseValue() {
+        return evaluator.condition(lockCondition.getExpression(), this);
     }
 }
