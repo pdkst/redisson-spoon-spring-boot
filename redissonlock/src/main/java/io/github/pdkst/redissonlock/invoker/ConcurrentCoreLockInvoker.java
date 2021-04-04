@@ -1,8 +1,8 @@
 package io.github.pdkst.redissonlock.invoker;
 
 import io.github.pdkst.redissonlock.LockInvoker;
-import io.github.pdkst.redissonlock.RedissonLock;
 import io.github.pdkst.redissonlock.context.InvokerContext;
+import io.github.pdkst.redissonlock.context.LockCondition;
 import io.github.pdkst.redissonlock.context.LockContext;
 import lombok.AllArgsConstructor;
 
@@ -19,7 +19,7 @@ public class ConcurrentCoreLockInvoker implements LockInvoker {
 
     @Override
     public LockContext<Lock> initContext(InvokerContext context) {
-        final RedissonLock redissonLock = context.getRedissonLock();
-        return new LockContext<>(lockSupplier.get(), redissonLock.timeout(), redissonLock.leaseTime());
+        final LockCondition lockCondition = context.getLockCondition();
+        return new LockContext<>(lockSupplier.get(), lockCondition.getTimeout(), lockCondition.getLeaseTime());
     }
 }
