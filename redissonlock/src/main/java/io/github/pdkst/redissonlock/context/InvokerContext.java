@@ -33,6 +33,7 @@ public class InvokerContext {
     public InvokerContext(final ProceedingJoinPoint joinPoint, final RedissonLock redissonLock, ExpressionEvaluator evaluator) {
         this.lockCondition = new LockCondition(redissonLock.value(), redissonLock.timeout(), redissonLock.leaseTime());
         this.object = joinPoint.getTarget();
+        this.args = joinPoint.getArgs();
         this.clazz = object != null ? object.getClass() : null;
         final MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         this.method = signature.getMethod();

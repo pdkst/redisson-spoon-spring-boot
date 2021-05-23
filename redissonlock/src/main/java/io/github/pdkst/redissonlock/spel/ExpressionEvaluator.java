@@ -33,7 +33,7 @@ public class ExpressionEvaluator extends CachedExpressionEvaluator {
     public String condition(String conditionExpression,
                             InvokerContext context,
                             EvaluationContext evalContext) {
-        final AnnotatedElementKey elementKey = new AnnotatedElementKey(context.getMethod(), null);
+        final AnnotatedElementKey elementKey = new AnnotatedElementKey(context.getMethod(), context.getClazz());
         return getExpression(this.conditionCache, elementKey, conditionExpression)
                 .getValue(evalContext, String.class);
     }
