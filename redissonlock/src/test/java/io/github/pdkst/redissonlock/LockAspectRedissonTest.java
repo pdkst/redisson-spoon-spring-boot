@@ -25,8 +25,13 @@ public class LockAspectRedissonTest {
     RedissonClient redissonClient;
 
     @Test
-    void doAround() {
-        target.aopTarget("testLockName");
+    void testRoot() {
+        target.rootTarget("testLockName");
+    }
+
+    @Test
+    void testParamName() {
+        target.paramNameTarget("testLockName");
     }
 
 }

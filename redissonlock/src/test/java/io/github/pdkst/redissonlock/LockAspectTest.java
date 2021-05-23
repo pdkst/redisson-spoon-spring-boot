@@ -21,8 +21,8 @@ public class LockAspectTest {
     LockAspectTarget target;
 
     @Test
-    void doAround() {
-        target.aopTarget("testLockName");
+    void testRoot() {
+        target.rootTarget("testLockName");
     }
 
 }
