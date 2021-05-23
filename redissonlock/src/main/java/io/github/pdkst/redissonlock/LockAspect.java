@@ -1,7 +1,6 @@
 package io.github.pdkst.redissonlock;
 
-import io.github.pdkst.redissonlock.context.InvokerContext;
-import io.github.pdkst.redissonlock.context.LockContext;
+import io.github.pdkst.redissonlock.context.ProcessorContext;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -16,22 +15,12 @@ import org.aspectj.lang.annotation.Aspect;
 @Aspect
 @RequiredArgsConstructor
 public class LockAspect {
-
-    final LockInvoker lockInvoker;
+    final LockProcessor lockProcessor;
 
     @Around("@annotation(lock)")
     public Object doAround(ProceedingJoinPoint pjp, RedissonLock lock) throws Throwable {
-        // 参数名发现器
-        final InvokerContext invokerContext = new InvokerContext(pjp, lock);
-        final LockContext<?> lockContext = lockInvoker.initContext(invokerContext);
-        try {
-            if (lockContext.onLock()) {
-                return pjp.proceed();
-            }
-        } finally {
-            lockContext.onRelease();
-        }
-        throw new IllegalStateException("lock fail！");
+        final ProcessorContext context = new ProcessorContext(pjp, lock);
+        return lockProcessor.process(context);
     }
 
 }

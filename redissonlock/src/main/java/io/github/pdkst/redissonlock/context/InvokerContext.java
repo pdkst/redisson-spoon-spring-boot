@@ -26,6 +26,9 @@ public class InvokerContext {
     public InvokerContext(final ProceedingJoinPoint joinPoint, final RedissonLock redissonLock) {
         this(joinPoint, redissonLock, new ExpressionEvaluator());
     }
+    public InvokerContext(final ProcessorContext context) {
+        this(context.getProceedingJoinPoint(), context.getLock(), new ExpressionEvaluator());
+    }
 
     public InvokerContext(final ProceedingJoinPoint joinPoint, final RedissonLock redissonLock, ExpressionEvaluator evaluator) {
         this.lockCondition = new LockCondition(redissonLock.value(), redissonLock.timeout(), redissonLock.leaseTime());

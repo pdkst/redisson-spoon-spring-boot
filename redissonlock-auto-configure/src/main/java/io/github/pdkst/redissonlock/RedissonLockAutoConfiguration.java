@@ -1,5 +1,6 @@
 package io.github.pdkst.redissonlock;
 
+import io.github.pdkst.redissonlock.invoker.DefaultLockProcessor;
 import io.github.pdkst.redissonlock.invoker.RedissonLockInvoker;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
@@ -15,6 +16,7 @@ import java.util.Set;
 
 /**
  * Redisson Lock 自动配置类
+ *
  * @author pdkst
  * @since 2021/3/5
  */
@@ -24,8 +26,14 @@ import java.util.Set;
 public class RedissonLockAutoConfiguration {
 
     @Bean
-    public LockAspect lockAspect(LockInvoker lockInvoker) {
-        return new LockAspect(lockInvoker);
+    public LockAspect lockAspect(LockProcessor lockProcessor) {
+        return new LockAspect(lockProcessor);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public DefaultLockProcessor lockAspect(LockInvoker lockInvoker) {
+        return new DefaultLockProcessor(lockInvoker);
     }
 
     @Bean
