@@ -69,10 +69,10 @@ public class RedissonLockAutoConfiguration {
     @ConditionalOnProperty(prefix = RedissonLockProperties.REDISSON_LOCK_CONFIG_PREFIX, name = "type", havingValue = "replica")
     @ConditionalOnMissingBean(RedissonClient.class)
     public Config masterRedissonConfig(RedissonLockProperties redissonLockProperties, Config redissonLockConfig) {
-        final Set<String> slaveAddress = redissonLockProperties.getSlaveAddress();
+        final Set<String> replicaAddress = redissonLockProperties.getReplicaAddress();
         redissonLockConfig.useMasterSlaveServers()
                 .setMasterAddress(redissonLockProperties.getAddress())
-                .setSlaveAddresses(slaveAddress);
+                .setSlaveAddresses(replicaAddress);
         return redissonLockConfig;
     }
 

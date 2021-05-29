@@ -18,7 +18,7 @@ public class RedissonLockProperties {
     private String prefix = REDISSON_LOCK_REDIS_DEFAULT_PREFIX;
     private RedissonMode type = RedissonMode.single;
     private String address = "redis://localhost:6379";
-    private Set<String> slaveAddress;
+    private Set<String> replicaAddress;
     private String[] nodeAddress;
     private String password;
 
