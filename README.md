@@ -4,11 +4,45 @@ redissonlock-spring-boot-starter
 
 ### 说明
 
-需要开启AOP功能，依靠注解快速实现锁（默认包括redisson分布式锁）
+分布式简单锁实现，一个注解开启分布式锁；
+
+注：需要开启AOP功能，依靠注解快速实现锁（默认包括redisson分布式锁）
+
+### 使用
+
+maven项目：将`LEAST`替换成要使用的版本，比如`1.0-SNAPSHOT`
+
+```xml
+
+<dependency>
+	<groupId>io.github.pdkst</groupId>
+	<artifactId>redissonlock-spring-boot-starter</artifactId>
+	<version>LEAST</version>
+</dependency>
+```
+
+然后在pom.xml文件目录执行mvn打包命令即可引入
+
+```bash
+mvn clean package -Dmaven.test.skip
+```
+
+### 配置
+
+最小配置，引入即开启
+
+```yaml
+pdkst:
+  redissonlock:
+    enable: true
+    type: single
+    address: redis://:password@localhost:6379
+```
 
 ### 使用说明
 
 ```java
+
 @Slf4j
 @Component
 public class LockAspectTarget {
