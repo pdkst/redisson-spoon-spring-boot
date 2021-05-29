@@ -16,13 +16,15 @@ public @interface RedissonLock {
 
     /**
      * 请求锁时间
-     * @return 毫秒
+     *
+     * @return 毫秒，默认30000毫秒
      */
     long timeout() default 30000;
 
     /**
      * 锁剩余时间
-     * @return 毫秒
+     *
+     * @return 毫秒，默认3000毫秒
      */
     long leaseTime() default 30000;
 }

@@ -10,14 +10,30 @@ import java.util.Set;
  * @since 2021/4/4
  */
 @Data
-@ConfigurationProperties(prefix = RedissonLockProperties.REDISSON_LOCK_PREFIX)
+@ConfigurationProperties(prefix = RedissonLockProperties.REDISSON_LOCK_CONFIG_PREFIX)
 public class RedissonLockProperties {
-    public static final String REDISSON_LOCK_PREFIX = "pdkst.redissonlock";
+    public static final String REDISSON_LOCK_CONFIG_PREFIX = "pdkst.redissonlock";
+    public static final String REDISSON_LOCK_REDIS_DEFAULT_PREFIX = "pdkst:redissonlock:";
     private boolean enable;
-    private String prefix;
-    private String type;
-    private String address;
+    private String prefix = REDISSON_LOCK_REDIS_DEFAULT_PREFIX;
+    private RedissonMode type = RedissonMode.single;
+    private String address = "redis://localhost:6379";
     private Set<String> slaveAddress;
     private String[] nodeAddress;
     private String password;
+
+    static enum RedissonMode {
+        /**
+         * 单机
+         */
+        single,
+        /**
+         * 主从
+         */
+        replica,
+        /**
+         * 集群
+         */
+        cluster
+    }
 }

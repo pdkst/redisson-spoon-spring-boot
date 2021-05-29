@@ -10,6 +10,8 @@ import java.util.concurrent.locks.Lock;
 import java.util.function.Supplier;
 
 /**
+ * Java核心AQS锁执行器，只包涵单机锁信息，如果lockSupplier提供的锁为单例则相当于Synchronized
+ *
  * @author pdkst
  * @since 2021/3/5
  */

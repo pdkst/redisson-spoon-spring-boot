@@ -22,7 +22,7 @@ import java.util.Set;
  */
 @Configuration
 @EnableConfigurationProperties(RedissonLockProperties.class)
-@ConditionalOnProperty(prefix = RedissonLockProperties.REDISSON_LOCK_PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = RedissonLockProperties.REDISSON_LOCK_CONFIG_PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class RedissonLockAutoConfiguration {
 
     @Bean
@@ -56,7 +56,7 @@ public class RedissonLockAutoConfiguration {
     }
 
     @Bean
-    @ConditionalOnProperty(prefix = RedissonLockProperties.REDISSON_LOCK_PREFIX, name = "type", havingValue = "single")
+    @ConditionalOnProperty(prefix = RedissonLockProperties.REDISSON_LOCK_CONFIG_PREFIX, name = "type", havingValue = "single")
     @ConditionalOnMissingBean(RedissonClient.class)
     public Config singleRedissonConfig(RedissonLockProperties redissonLockProperties, Config redissonLockConfig) {
         redissonLockConfig.useSingleServer()
@@ -66,7 +66,7 @@ public class RedissonLockAutoConfiguration {
     }
 
     @Bean
-    @ConditionalOnProperty(prefix = RedissonLockProperties.REDISSON_LOCK_PREFIX, name = "type", havingValue = "master")
+    @ConditionalOnProperty(prefix = RedissonLockProperties.REDISSON_LOCK_CONFIG_PREFIX, name = "type", havingValue = "replica")
     @ConditionalOnMissingBean(RedissonClient.class)
     public Config masterRedissonConfig(RedissonLockProperties redissonLockProperties, Config redissonLockConfig) {
         final Set<String> slaveAddress = redissonLockProperties.getSlaveAddress();
@@ -77,7 +77,7 @@ public class RedissonLockAutoConfiguration {
     }
 
     @Bean
-    @ConditionalOnProperty(prefix = RedissonLockProperties.REDISSON_LOCK_PREFIX, name = "type", havingValue = "cluster")
+    @ConditionalOnProperty(prefix = RedissonLockProperties.REDISSON_LOCK_CONFIG_PREFIX, name = "type", havingValue = "cluster")
     @ConditionalOnMissingBean(RedissonClient.class)
     public Config clusterRedissonConfig(RedissonLockProperties redissonLockProperties, Config redissonLockConfig) {
         redissonLockConfig.useClusterServers()
