@@ -2,6 +2,7 @@ package io.github.pdkst.redissonlock.context;
 
 import io.github.pdkst.redissonlock.RedissonLock;
 import io.github.pdkst.redissonlock.spel.ExpressionEvaluator;
+import io.github.pdkst.redissonlock.spel.MethodReferenceEvaluationContext;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -22,6 +23,7 @@ public class InvokerContext {
     private Object[] args;
     private final LockCondition lockCondition;
     private final ExpressionEvaluator evaluator;
+    private final MethodReferenceEvaluationContext methodReferenceEvaluationContext;
 
     public InvokerContext(final ProceedingJoinPoint joinPoint, final RedissonLock redissonLock) {
         this(joinPoint, redissonLock, new ExpressionEvaluator());
@@ -39,9 +41,10 @@ public class InvokerContext {
         final MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         this.method = signature.getMethod();
         this.evaluator = evaluator;
+        this.methodReferenceEvaluationContext = evaluator.createEvaluationContext(object, clazz, method, args);
     }
 
     public String parseValue() {
-        return evaluator.condition(lockCondition.getExpression(), this);
+        return evaluator.condition(lockCondition.getExpression(), method, methodReferenceEvaluationContext);
     }
 }
