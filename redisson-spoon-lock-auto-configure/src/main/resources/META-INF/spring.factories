@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  io.github.pdkst.redissonlock.RedissonLockAutoConfiguration
+  io.github.pdkst.redisson.spoon.lock.RedissonLockAutoConfiguration

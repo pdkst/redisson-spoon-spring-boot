@@ -1,4 +1,4 @@
-package io.github.pdkst.redissonlock.spel;
+package io.github.pdkst.redisson.spoon.spel;
 
 import lombok.Getter;
 import org.springframework.context.expression.MethodBasedEvaluationContext;
@@ -16,14 +16,16 @@ import java.lang.reflect.Method;
 public class MethodReferenceEvaluationContext extends MethodBasedEvaluationContext {
     /** Root对象 */
     private final Object root;
+    private final Class<?> clazz;
     /** method，被执行的方法 */
     private final Method method;
     /** 方法实际参数 */
     private final Object[] arguments;
 
-    public MethodReferenceEvaluationContext(Object root, Method method, Object[] arguments, ParameterNameDiscoverer parameterNameDiscoverer) {
+    public MethodReferenceEvaluationContext(Object root, Class<?> clazz, Method method, Object[] arguments, ParameterNameDiscoverer parameterNameDiscoverer) {
         super(root, method, arguments, parameterNameDiscoverer);
         this.root = root;
+        this.clazz = clazz;
         this.method = method;
         this.arguments = arguments;
     }

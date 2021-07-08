@@ -1,6 +1,6 @@
-package io.github.pdkst.redissonlock;
+package io.github.pdkst.redisson.spoon.lock;
 
-import io.github.pdkst.redissonlock.invoker.ConcurrentCoreLockInvoker;
+import io.github.pdkst.redisson.spoon.lock.invoker.ConcurrentCoreLockInvoker;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;

@@ -1,5 +1,6 @@
 package io.github.pdkst.redissonlock;
 
+import io.github.pdkst.redisson.spoon.lock.RedissonLock;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

@@ -1,6 +1,6 @@
-package io.github.pdkst.redissonlock;
+package io.github.pdkst.redisson.spoon.lock;
 
-import io.github.pdkst.redissonlock.context.ProcessorContext;
+import io.github.pdkst.redisson.spoon.lock.context.ProcessorContext;
 
 /**
  * 执行切点的具体方法，重写可能需要注意原先逻辑

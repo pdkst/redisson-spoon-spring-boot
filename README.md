@@ -64,7 +64,7 @@ public class LockAspectTarget {
 
 ```
 
-- `#root`对象指向`io.github.pdkst.redissonlock.context.InvokerContext`
+- `#root`对象指向`io.github.pdkst.redisson.spoon.lock.context.InvokerContext`
 - `#lockName`指向参数名字（示例参数名字是`lockName`）
 - `#method` 指向当前方法`java.lang.reflect.Method`类型
 

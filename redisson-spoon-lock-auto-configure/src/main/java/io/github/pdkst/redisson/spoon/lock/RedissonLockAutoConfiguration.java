@@ -1,6 +1,6 @@
-package io.github.pdkst.redissonlock;
+package io.github.pdkst.redisson.spoon.lock;
 
-import io.github.pdkst.redissonlock.invoker.DefaultLockProcessor;
+import io.github.pdkst.redisson.spoon.lock.invoker.DefaultLockProcessor;
 import org.springframework.boot.autoconfigure.condition.AnyNestedCondition;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-import static io.github.pdkst.redissonlock.RedissonLockAutoConfiguration.OnRedissonLockCondition;
+import static io.github.pdkst.redisson.spoon.lock.RedissonLockAutoConfiguration.OnRedissonLockCondition;
 
 /**
  * Redisson Lock 自动配置类

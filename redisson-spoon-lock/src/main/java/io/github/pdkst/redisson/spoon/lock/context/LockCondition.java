@@ -1,4 +1,4 @@
-package io.github.pdkst.redissonlock.context;
+package io.github.pdkst.redisson.spoon.lock.context;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

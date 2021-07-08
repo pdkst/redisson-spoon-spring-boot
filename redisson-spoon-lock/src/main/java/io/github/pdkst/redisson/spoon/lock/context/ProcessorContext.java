@@ -1,6 +1,6 @@
-package io.github.pdkst.redissonlock.context;
+package io.github.pdkst.redisson.spoon.lock.context;
 
-import io.github.pdkst.redissonlock.RedissonLock;
+import io.github.pdkst.redisson.spoon.lock.RedissonLock;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;

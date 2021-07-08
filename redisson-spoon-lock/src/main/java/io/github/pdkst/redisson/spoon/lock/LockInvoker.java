@@ -1,7 +1,7 @@
-package io.github.pdkst.redissonlock;
+package io.github.pdkst.redisson.spoon.lock;
 
-import io.github.pdkst.redissonlock.context.InvokerContext;
-import io.github.pdkst.redissonlock.context.LockContext;
+import io.github.pdkst.redisson.spoon.lock.context.InvokerContext;
+import io.github.pdkst.redisson.spoon.lock.context.LockContext;
 
 import java.util.concurrent.locks.Lock;
 

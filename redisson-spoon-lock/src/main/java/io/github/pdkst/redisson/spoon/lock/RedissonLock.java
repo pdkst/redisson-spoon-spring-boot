@@ -1,4 +1,4 @@
-package io.github.pdkst.redissonlock;
+package io.github.pdkst.redisson.spoon.lock;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

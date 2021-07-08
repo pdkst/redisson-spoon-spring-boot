@@ -1,4 +1,4 @@
-package io.github.pdkst.redissonlock;
+package io.github.pdkst.redisson.spoon.lock;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

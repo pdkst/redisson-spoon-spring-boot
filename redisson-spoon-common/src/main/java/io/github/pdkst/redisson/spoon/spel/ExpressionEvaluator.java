@@ -1,4 +1,4 @@
-package io.github.pdkst.redissonlock.spel;
+package io.github.pdkst.redisson.spoon.spel;
 
 import org.springframework.aop.support.AopUtils;
 import org.springframework.context.expression.AnnotatedElementKey;
@@ -41,7 +41,7 @@ public class ExpressionEvaluator extends CachedExpressionEvaluator {
     public MethodReferenceEvaluationContext createEvaluationContext(Object root, Class<?> clazz, Method method, Object[] args) {
         // 获取真实执行方法
         final Method targetMethod = getTargetMethod(clazz, method);
-        return new MethodReferenceEvaluationContext(root, targetMethod, args, this.paramNameDiscoverer);
+        return new MethodReferenceEvaluationContext(root, clazz, targetMethod, args, this.paramNameDiscoverer);
     }
 
     /**

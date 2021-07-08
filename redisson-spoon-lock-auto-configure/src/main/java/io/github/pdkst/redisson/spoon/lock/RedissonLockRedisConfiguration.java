@@ -1,6 +1,6 @@
-package io.github.pdkst.redissonlock;
+package io.github.pdkst.redisson.spoon.lock;
 
-import io.github.pdkst.redissonlock.invoker.RedissonLockInvoker;
+import io.github.pdkst.redisson.spoon.lock.invoker.RedissonLockInvoker;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
