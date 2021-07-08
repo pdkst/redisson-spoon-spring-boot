@@ -15,15 +15,15 @@ import java.lang.reflect.Method;
 @Getter
 public class MethodReferenceEvaluationContext extends MethodBasedEvaluationContext {
     /** Root对象 */
-    private final Object rootObject;
+    private final Object root;
     /** method，被执行的方法 */
     private final Method method;
     /** 方法实际参数 */
     private final Object[] arguments;
 
-    public MethodReferenceEvaluationContext(Object rootObject, Method method, Object[] arguments, ParameterNameDiscoverer parameterNameDiscoverer) {
-        super(rootObject, method, arguments, parameterNameDiscoverer);
-        this.rootObject = rootObject;
+    public MethodReferenceEvaluationContext(Object root, Method method, Object[] arguments, ParameterNameDiscoverer parameterNameDiscoverer) {
+        super(root, method, arguments, parameterNameDiscoverer);
+        this.root = root;
         this.method = method;
         this.arguments = arguments;
     }

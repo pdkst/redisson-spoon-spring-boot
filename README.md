@@ -17,7 +17,7 @@ maven项目：将`LEAST`替换成要使用的版本，比如`1.0-SNAPSHOT`
 
 <dependency>
 	<groupId>io.github.pdkst</groupId>
-	<artifactId>redissonlock-spring-boot-starter</artifactId>
+	<artifactId>redisson-spoon-lock-spring-boot-starter</artifactId>
 	<version>LEAST</version>
 </dependency>
 ```

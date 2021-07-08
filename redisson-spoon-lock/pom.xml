@@ -3,14 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
-		<artifactId>redissonlock-spring-boot-starter</artifactId>
+		<artifactId>redisson-spoon-spring-boot-starter</artifactId>
 		<groupId>io.github.pdkst</groupId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 	
 	<modelVersion>4.0.0</modelVersion>
 	
-	<artifactId>redissonlock</artifactId>
+	<artifactId>redisson-spoon-lock</artifactId>
 	
 	<properties>
 		<maven.compiler.source>8</maven.compiler.source>
@@ -18,6 +18,11 @@
 	</properties>
 	
 	<dependencies>
+		<dependency>
+			<groupId>io.github.pdkst</groupId>
+			<artifactId>redisson-spoon-common</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-aop</artifactId>

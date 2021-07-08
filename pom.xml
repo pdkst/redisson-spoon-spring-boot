@@ -8,8 +8,9 @@
 	<artifactId>redisson-spoon-spring-boot-starter</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<modules>
-		<module>redissonlock</module>
-		<module>redissonlock-auto-configure</module>
+		<module>redisson-spoon-common</module>
+		<module>redisson-spoon-lock</module>
+		<module>redisson-spoon-lock-auto-configure</module>
 	</modules>
 	<packaging>pom</packaging>
 	
@@ -37,6 +38,11 @@
 	
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>io.github.pdkst</groupId>
+				<artifactId>redisson-spoon-spring-boot-starter</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>
