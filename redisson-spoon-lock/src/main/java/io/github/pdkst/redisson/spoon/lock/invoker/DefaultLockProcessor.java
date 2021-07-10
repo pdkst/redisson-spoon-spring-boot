@@ -29,7 +29,7 @@ public class DefaultLockProcessor implements LockProcessor {
                 return context.getProceedingJoinPoint().proceed();
             }
         } finally {
-            // 一般需要判断
+            // 一般需要判断是否锁定成功
             lockContext.onRelease();
         }
         throw new IllegalStateException("lock fail！");
