@@ -37,9 +37,11 @@ CoreLock功能受限，默认配置只有一个全局锁
 
 ```yaml
 pdkst:
-  redissonlock:
-    enable: true
-    lock-prefix: 
+  redisson:
+    spoon:
+      lock:
+        enable: true
+        lock-prefix: pdkst:github:lock
 ```
 
 ### 使用说明

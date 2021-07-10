@@ -1,5 +1,6 @@
 pdkst:
-  redissonlock:
-    enable: true
-    type: single
-    address: redis://:password@localhost:6379
+  redisson:
+    spoon:
+      lock:
+        enable: true
+        lock-prefix: pdkst:github:lock
