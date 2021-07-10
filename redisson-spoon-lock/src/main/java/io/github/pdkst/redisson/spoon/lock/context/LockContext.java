@@ -28,8 +28,15 @@ public class LockContext<T extends Lock> {
 
     /**
      * 释放锁时执行，finally，onLock执行失败也会执行 一般需要判断 是否获得锁
+     *
+     * @return 如果解锁返回true，本地锁总是返回true
      */
-    public void onRelease() {
+    public boolean onRelease() {
         lock.unlock();
+        return true;
+    }
+
+    public T getLock() {
+        return this.lock;
     }
 }

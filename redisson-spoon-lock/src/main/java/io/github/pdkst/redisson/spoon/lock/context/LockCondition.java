@@ -10,7 +10,16 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class LockCondition {
+    /**
+     * EL表达式
+     */
     private String expression;
+    /**
+     * 等待时间
+     */
     private long timeout;
+    /**
+     * 运行时间
+     */
     private long leaseTime;
 }
