@@ -6,8 +6,7 @@ redissonlock-spring-boot-starter
 
 分布式简单锁实现，一个注解开启分布式锁；
 
-注：需要开启AOP功能，依靠注解快速实现锁（默认包括redisson分布式锁）
-注2：应用到线上环境请确保了解关键逻辑，或经过详细测试
+注：需要开启AOP功能，依靠注解快速实现锁（默认包括redisson分布式锁） 注2：应用到线上环境请确保了解关键逻辑，或经过详细测试
 
 ### 使用
 
@@ -30,14 +29,17 @@ mvn clean package -Dmaven.test.skip
 
 ### 配置
 
-最小配置，引入即开启
+最小配置，引入即开启JavaCore
+
+CoreLock功能受限，默认配置只有一个全局锁
+
+如果Spring项目中存在RedissonClient实例则默认开启Redisson全局锁
 
 ```yaml
 pdkst:
   redissonlock:
     enable: true
-    type: single
-    address: redis://:password@localhost:6379
+    lock-prefix: 
 ```
 
 ### 使用说明

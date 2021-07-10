@@ -1,6 +1,7 @@
 package io.github.pdkst.redissonlock;
 
 import io.github.pdkst.redisson.spoon.lock.LockProcessor;
+import io.github.pdkst.redisson.spoon.lock.RedissonClientProvider;
 import io.github.pdkst.redisson.spoon.lock.invoker.DefaultLockProcessor;
 import io.github.pdkst.redisson.spoon.lock.invoker.RedissonLockInvoker;
 import lombok.AllArgsConstructor;
@@ -13,10 +14,10 @@ import org.springframework.context.annotation.Bean;
  */
 @AllArgsConstructor
 public class RedissonLockConfiguration {
-    final RedissonClient redissonClient;
+    final RedissonClientProvider redissonClientProvider;
 
     @Bean
     public LockProcessor lockProcessor() {
-        return new DefaultLockProcessor(new RedissonLockInvoker("testRedissonPrefix", redissonClient));
+        return new DefaultLockProcessor(new RedissonLockInvoker("testRedissonPrefix", redissonClientProvider));
     }
 }

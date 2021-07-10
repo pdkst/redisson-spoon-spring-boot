@@ -23,8 +23,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @since 1.0
  */
 public class ExpressionEvaluator extends CachedExpressionEvaluator {
-    private final ParameterNameDiscoverer paramNameDiscoverer = new DefaultParameterNameDiscoverer();
-
     private final Map<ExpressionKey, Expression> conditionCache = new ConcurrentHashMap<>(64);
 
     private final Map<AnnotatedElementKey, Method> targetMethodCache = new ConcurrentHashMap<>(64);
@@ -38,10 +36,11 @@ public class ExpressionEvaluator extends CachedExpressionEvaluator {
      * @param args 执行参数
      * @return EvaluationContext
      */
-    public MethodReferenceEvaluationContext createEvaluationContext(Object root, Class<?> clazz, Method method, Object[] args) {
+    public TypedMethodBasedEvaluationContext<MethodEvaluationRoot> createEvaluationContext(Object root, Class<?> clazz, Method method, Object[] args) {
         // 获取真实执行方法
         final Method targetMethod = getTargetMethod(clazz, method);
-        return new MethodReferenceEvaluationContext(root, clazz, targetMethod, args, this.paramNameDiscoverer);
+        final MethodEvaluationRoot rootObject = new MethodEvaluationRoot(root, clazz, targetMethod, args);
+        return new TypedMethodBasedEvaluationContext<>(rootObject);
     }
 
     /**
@@ -69,12 +68,12 @@ public class ExpressionEvaluator extends CachedExpressionEvaluator {
      * @see #condition(String, Method, EvaluationContext)
      */
     public String condition(String conditionExpression,
-                            Object root,
+                            MethodEvaluationRoot root,
                             Class<?> clazz,
                             Method method,
                             Object[] args) {
         final Method targetMethod = getTargetMethod(clazz, method);
-        final MethodReferenceEvaluationContext evaluationContext = this.createEvaluationContext(root, clazz, method, args);
+        final TypedMethodBasedEvaluationContext<MethodEvaluationRoot> evaluationContext = this.createEvaluationContext(root, clazz, method, args);
         return condition(conditionExpression, targetMethod, evaluationContext);
     }
 
@@ -86,7 +85,7 @@ public class ExpressionEvaluator extends CachedExpressionEvaluator {
      * @return 实际方法
      * @see AopUtils#getMostSpecificMethod(Method, Class)
      */
-    private Method getTargetMethod(Class<?> targetClass, Method method) {
+    public Method getTargetMethod(Class<?> targetClass, Method method) {
         AnnotatedElementKey methodKey = new AnnotatedElementKey(method, targetClass);
         Method targetMethod = this.targetMethodCache.get(methodKey);
         if (targetMethod == null) {

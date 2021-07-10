@@ -2,13 +2,12 @@ package io.github.pdkst.redisson.spoon.lock.context;
 
 import io.github.pdkst.redisson.spoon.lock.RedissonLock;
 import io.github.pdkst.redisson.spoon.spel.ExpressionEvaluator;
-import io.github.pdkst.redisson.spoon.spel.MethodReferenceEvaluationContext;
+import io.github.pdkst.redisson.spoon.spel.MethodEvaluationRoot;
+import io.github.pdkst.redisson.spoon.spel.TypedMethodBasedEvaluationContext;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
-
-import java.lang.reflect.Method;
 
 /**
  * @author pdkst
@@ -17,13 +16,11 @@ import java.lang.reflect.Method;
 @Data
 @AllArgsConstructor
 public class InvokerContext {
-    private final Object object;
-    private final Class<?> clazz;
-    private final Method method;
-    private Object[] args;
     private final LockCondition lockCondition;
     private final ExpressionEvaluator evaluator;
-    private final MethodReferenceEvaluationContext methodReferenceEvaluationContext;
+    private final TypedMethodBasedEvaluationContext<MethodEvaluationRoot> methodReferenceEvaluationContext;
+    private final MethodEvaluationRoot methodEvaluationRoot;
+
 
     public InvokerContext(final ProceedingJoinPoint joinPoint, final RedissonLock redissonLock) {
         this(joinPoint, redissonLock, new ExpressionEvaluator());
@@ -35,16 +32,15 @@ public class InvokerContext {
 
     public InvokerContext(final ProceedingJoinPoint joinPoint, final RedissonLock redissonLock, ExpressionEvaluator evaluator) {
         this.lockCondition = new LockCondition(redissonLock.value(), redissonLock.timeout(), redissonLock.leaseTime());
-        this.object = joinPoint.getTarget();
-        this.args = joinPoint.getArgs();
-        this.clazz = object != null ? object.getClass() : null;
         final MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        this.method = signature.getMethod();
+        final Object target = joinPoint.getTarget();
+        Class<?> clazz = target != null ? target.getClass() : null;
         this.evaluator = evaluator;
-        this.methodReferenceEvaluationContext = evaluator.createEvaluationContext(object, clazz, method, args);
+        this.methodReferenceEvaluationContext = evaluator.createEvaluationContext(target, clazz, signature.getMethod(), joinPoint.getArgs());
+        this.methodEvaluationRoot = this.methodReferenceEvaluationContext.getEvaluationRoot();
     }
 
     public String parseValue() {
-        return evaluator.condition(lockCondition.getExpression(), method, methodReferenceEvaluationContext);
+        return evaluator.condition(lockCondition.getExpression(), methodEvaluationRoot.getMethod(), methodReferenceEvaluationContext);
     }
 }
