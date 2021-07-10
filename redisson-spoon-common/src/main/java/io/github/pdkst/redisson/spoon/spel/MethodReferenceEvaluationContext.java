@@ -1,5 +1,6 @@
 package io.github.pdkst.redisson.spoon.spel;
 
+import lombok.Builder;
 import lombok.Getter;
 import org.springframework.context.expression.MethodBasedEvaluationContext;
 import org.springframework.core.ParameterNameDiscoverer;
@@ -13,6 +14,7 @@ import java.lang.reflect.Method;
  * @since 2021/6/8
  */
 @Getter
+@Builder
 public class MethodReferenceEvaluationContext extends MethodBasedEvaluationContext {
     /** Root对象 */
     private final Object root;
