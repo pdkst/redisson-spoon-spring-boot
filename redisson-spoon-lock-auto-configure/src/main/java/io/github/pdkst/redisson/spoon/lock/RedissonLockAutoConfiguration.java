@@ -1,7 +1,9 @@
 package io.github.pdkst.redisson.spoon.lock;
 
 import io.github.pdkst.redisson.spoon.lock.invoker.DefaultLockProcessor;
+import org.redisson.api.RedissonClient;
 import org.springframework.boot.autoconfigure.condition.AnyNestedCondition;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -38,7 +40,6 @@ public class RedissonLockAutoConfiguration {
     }
 
 
-
     static class OnRedissonLockCondition extends AnyNestedCondition {
         OnRedissonLockCondition() {
             super(ConfigurationPhase.PARSE_CONFIGURATION);
@@ -47,12 +48,12 @@ public class RedissonLockAutoConfiguration {
         /**
          * dont copy xxx
          */
-        @ConditionalOnProperty(prefix = RedissonLockProperties.REDISSON_LOCK_CONFIG_PREFIX, name = "type", havingValue = "xxx", matchIfMissing = true)
+        @ConditionalOnMissingBean(RedissonClient.class)
         static class CoreLockProperty {
 
         }
 
-        @ConditionalOnProperty(prefix = RedissonLockProperties.REDISSON_LOCK_CONFIG_PREFIX, name = "type")
+        @ConditionalOnBean(RedissonClient.class)
         static class RedissonLockProperty {
             //可以分拆多个
         }
