@@ -23,7 +23,7 @@ import static io.github.pdkst.redisson.spoon.lock.RedissonLockAutoConfiguration.
 @ConditionalOnProperty(prefix = RedissonLockProperties.REDISSON_LOCK_CONFIG_PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 @ConditionalOnMissingBean(LockProcessor.class)
 @Conditional(OnRedissonLockCondition.class)
-@Import({RedissonLockRedisConfiguration.class, RedissonLockCoreConfiguration.class})
+@Import({RedissonLockConfiguration.class, JavaCoreLockConfiguration.class})
 public class RedissonLockAutoConfiguration {
 
     @Bean

@@ -17,7 +17,7 @@ import java.util.Set;
  * @since 2021/5/29
  */
 @ConditionalOnProperty(prefix = RedissonLockProperties.REDISSON_LOCK_CONFIG_PREFIX, name = "type")
-public class RedissonLockRedisConfiguration {
+public class RedissonLockConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(LockInvoker.class)

@@ -14,7 +14,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @since 2021/5/29
  */
 @ConditionalOnProperty(prefix = RedissonLockProperties.REDISSON_LOCK_CONFIG_PREFIX, name = "type", havingValue = "xxx", matchIfMissing = true)
-public class RedissonLockCoreConfiguration {
+public class JavaCoreLockConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(LockInvoker.class)
