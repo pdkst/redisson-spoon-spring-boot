@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<groupId>io.github.pdkst</groupId>
-	<artifactId>redisson-spoon-spring-boot-starter</artifactId>
+	<artifactId>redisson-spoon-spring-boot</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<modules>
 		<module>redisson-spoon-common</module>
@@ -34,11 +34,6 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<scope>test</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>io.github.pdkst</groupId>
-			<artifactId>redisson-spoon-lock-auto-configure</artifactId>
 		</dependency>
 	</dependencies>
 	
