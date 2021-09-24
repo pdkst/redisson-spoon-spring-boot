@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 
 /**
  * 通过AOP对方法进行拦截
@@ -17,6 +18,11 @@ import org.aspectj.lang.annotation.Aspect;
 public class LockAspect {
     final LockProcessor lockProcessor;
 
+    @Pointcut("@annotation(io.github.pdkst.redisson.spoon.lock.RedissonLock)")
+    public void pointcut() {
+
+    }
+
     /**
      * 环绕通知，只拦截方法，具体逻辑交给{@link LockProcessor}执行
      *
@@ -26,7 +32,7 @@ public class LockAspect {
      * @throws Throwable 可能抛出的所有异常
      * @throws IllegalStateException 加锁失败会抛出此异常
      */
-    @Around("@annotation(lock)")
+    @Around("pointcut() && @annotation(lock)")
     public Object doAround(ProceedingJoinPoint pjp, RedissonLock lock) throws Throwable {
         final ProcessorContext context = new ProcessorContext(pjp, lock);
         return lockProcessor.process(context);
