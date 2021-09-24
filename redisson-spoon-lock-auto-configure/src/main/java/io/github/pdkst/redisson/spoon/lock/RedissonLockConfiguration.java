@@ -24,7 +24,7 @@ public class RedissonLockConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(RedissonClientProvider.class)
-    public RedissonClientProvider redissonClient(RedissonClient redissonClient) {
+    public RedissonClientProvider redissonClientProvider(RedissonClient redissonClient) {
         return () -> redissonClient;
     }
 
