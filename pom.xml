@@ -11,6 +11,7 @@
 		<module>redisson-spoon-common</module>
 		<module>redisson-spoon-lock</module>
 		<module>redisson-spoon-lock-auto-configure</module>
+		<module>redisson-spoon-spring-boot-starter</module>
 	</modules>
 	
 	<packaging>pom</packaging>
@@ -101,7 +102,7 @@
 		<repository>
 			<id>github</id>
 			<name>GitHub OWNER Apache Maven Packages</name>
-			<url>https://maven.pkg.github.com/pdkst/redisson-spoon-spring-boot-starter</url>
+			<url>https://maven.pkg.github.com/pdkst/redisson-spoon-spring-boot</url>
 		</repository>
 	</distributionManagement>
 </project>
