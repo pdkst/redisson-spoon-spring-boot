@@ -23,4 +23,18 @@ public class RedissonLockProperties {
      * 锁对象redis key前缀
      */
     private String lockPrefix = REDISSON_LOCK_REDIS_DEFAULT_PREFIX;
+
+    private Mode mode;
+
+    public enum Mode {
+        /**
+         * java核心锁
+         */
+        core,
+        /**
+         * redisson分布式锁
+         */
+        redisson,
+
+    }
 }

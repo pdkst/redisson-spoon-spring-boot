@@ -12,6 +12,7 @@
 		<module>redisson-spoon-lock</module>
 		<module>redisson-spoon-lock-auto-configure</module>
 	</modules>
+	
 	<packaging>pom</packaging>
 	
 	<properties>
@@ -34,6 +35,11 @@
 			<artifactId>logback-classic</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>io.github.pdkst</groupId>
+			<artifactId>redisson-spoon-lock-auto-configure</artifactId>
+		</dependency>
 	</dependencies>
 	
 	<dependencyManagement>
@@ -41,6 +47,11 @@
 			<dependency>
 				<groupId>io.github.pdkst</groupId>
 				<artifactId>redisson-spoon-spring-boot-starter</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.pdkst</groupId>
+				<artifactId>redisson-spoon-lock-auto-configure</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>

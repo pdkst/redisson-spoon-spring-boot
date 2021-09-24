@@ -1,12 +1,38 @@
-# Redisson-spoon-Lock-spring-boot-starter
-
-redissonlock-spring-boot-starter
+# Redisson-spoon-spring-boot-starter
 
 ### 说明
 
 分布式简单锁实现，一个注解开启分布式锁；
 
-注：需要开启AOP功能，依靠注解快速实现锁（默认包括redisson分布式锁） 注2：应用到线上环境请确保了解关键逻辑，或经过详细测试
+注：需要开启AOP功能，依靠注解快速实现锁（默认包括redisson分布式锁）
+
+注2：应用到线上环境请确保了解关键逻辑，或经过详细测试
+
+### 编译
+
+- clone项目：
+
+```bash
+git clone https://github.com/pdkst/redisson-spoon-spring-boot-starter.git
+```
+
+- cd到项目目录
+
+```bash
+cd redisson-spoon-spring-boot-starter
+```
+
+- maven编译安装到本地仓库：
+
+```bash
+mvn clean install
+```
+
+- 或者maven编译发布到maven私服仓库（需要在setting.xml中配置私服地址）：
+
+```bash
+mvn clean deploy
+```
 
 ### 使用
 
@@ -16,7 +42,7 @@ maven项目：将`LEAST`替换成要使用的版本，比如`1.0-SNAPSHOT`
 
 <dependency>
 	<groupId>io.github.pdkst</groupId>
-	<artifactId>redisson-spoon-lock-spring-boot-starter</artifactId>
+	<artifactId>redisson-spoon-spring-boot-starter</artifactId>
 	<version>LEAST</version>
 </dependency>
 ```

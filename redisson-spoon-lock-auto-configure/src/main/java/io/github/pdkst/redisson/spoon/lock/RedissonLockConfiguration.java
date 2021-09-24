@@ -2,6 +2,7 @@ package io.github.pdkst.redisson.spoon.lock;
 
 import io.github.pdkst.redisson.spoon.lock.invoker.RedissonLockInvoker;
 import org.redisson.api.RedissonClient;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -12,7 +13,8 @@ import org.springframework.context.annotation.Bean;
  * @author pdkst
  * @since 2021/5/29
  */
-@ConditionalOnProperty(prefix = RedissonLockProperties.REDISSON_LOCK_CONFIG_PREFIX, name = "type")
+@ConditionalOnBean(RedissonClient.class)
+@ConditionalOnProperty(havingValue = "redisson", name = "mode", matchIfMissing = true, prefix = RedissonLockProperties.REDISSON_LOCK_CONFIG_PREFIX)
 public class RedissonLockConfiguration {
 
     @Bean

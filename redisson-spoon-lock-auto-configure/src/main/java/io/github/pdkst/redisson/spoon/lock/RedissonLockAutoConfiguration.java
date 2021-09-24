@@ -39,7 +39,7 @@ public class RedissonLockAutoConfiguration {
         return new DefaultLockProcessor(lockInvoker);
     }
 
-
+    @ConditionalOnMissingBean(LockInvoker.class)
     static class OnRedissonLockCondition extends AnyNestedCondition {
         OnRedissonLockCondition() {
             super(ConfigurationPhase.PARSE_CONFIGURATION);
@@ -49,11 +49,13 @@ public class RedissonLockAutoConfiguration {
          * dont copy xxx
          */
         @ConditionalOnMissingBean(RedissonClient.class)
+        @ConditionalOnProperty(havingValue = "core", name = "mode", matchIfMissing = true, prefix = RedissonLockProperties.REDISSON_LOCK_CONFIG_PREFIX)
         static class CoreLockProperty {
 
         }
 
         @ConditionalOnBean(RedissonClient.class)
+        @ConditionalOnProperty(havingValue = "redisson", name = "mode", matchIfMissing = true, prefix = RedissonLockProperties.REDISSON_LOCK_CONFIG_PREFIX)
         static class RedissonLockProperty {
             //可以分拆多个
         }

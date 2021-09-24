@@ -2,6 +2,7 @@ package io.github.pdkst.redisson.spoon.lock;
 
 import io.github.pdkst.redisson.spoon.lock.invoker.ConcurrentCoreLockInvoker;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 
@@ -13,7 +14,8 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author pdkst
  * @since 2021/5/29
  */
-@ConditionalOnProperty(prefix = RedissonLockProperties.REDISSON_LOCK_CONFIG_PREFIX, name = "type", havingValue = "xxx", matchIfMissing = true)
+@ConditionalOnMissingClass("org.redisson.api.RedissonClient")
+@ConditionalOnProperty(havingValue = "core", name = "mode", matchIfMissing = true, prefix = RedissonLockProperties.REDISSON_LOCK_CONFIG_PREFIX)
 public class JavaCoreLockConfiguration {
 
     @Bean
